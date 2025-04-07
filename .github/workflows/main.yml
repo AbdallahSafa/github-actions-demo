@@ -5,6 +5,9 @@ on:
     branches:
       - main
   # Exercise: Try adding a trigger for pull requests!
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
@@ -28,6 +31,14 @@ jobs:
         if: always()
         run: |
           echo "Tests completed with status: ${{ job.status }}"
+      lint:
+        runs-on: ubuntu-latest
+
+        steps:
+          - uses: actions/checkout@v3
+
+          - name: Setup Node.js
+            uses: actions/setup-node@v3
 
   # Exercise: Add a new job to lint the app here!
   # Hint: You can use the same runner as the test job
